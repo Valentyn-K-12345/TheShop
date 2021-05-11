@@ -8,62 +8,35 @@ using TheShop.Application.Suppliers;
 using TheShop.Core.Logger;
 using TheShop.Domain.Interfaces;
 using TheShop.Domain.Models;
+using TheShop.Supplier.Domain.Interfaces;
 using TheShop.Supplier.Domain.Models;
 
 namespace TheShop.Application.Services
 {
     public class ArticleService : IArticleService
     {
-        private IArticleRepository _articleRepository;
-        private ILogger _logger;
+        private readonly IArticleRepository _articleRepository;
+        private readonly ILogger _logger;
 
-        private Supplier1 Supplier1;
-        private Supplier2 Supplier2;
-        private Supplier3 Supplier3;
+        private readonly List<ISupplier> _suppliers;
 
         public ArticleService(IArticleRepository articleRepository,
-            ILogger logger)
+            ILogger logger,
+            IEnumerable<ISupplier> suppliers)
         {
             _articleRepository = articleRepository;
             _logger = logger;
-            Supplier1 = new Supplier1();
-            Supplier2 = new Supplier2();
-            Supplier3 = new Supplier3();
+            _suppliers = suppliers.ToList();
         }
 
         public void OrderAndSellArticle(int id, int maxExpectedPrice, int buyerId)
         {
             #region ordering article
 
-            SupplierArticle article = null;
-            SupplierArticle tempArticle = null;
-            var articleExists = Supplier1.ArticleInInventory(id);
-            if (articleExists)
-            {
-                tempArticle = Supplier1.GetArticle(id);
-                if (maxExpectedPrice < tempArticle.Price)
-                {
-                    articleExists = Supplier2.ArticleInInventory(id);
-                    if (articleExists)
-                    {
-                        tempArticle = Supplier2.GetArticle(id);
-                        if (maxExpectedPrice < tempArticle.Price)
-                        {
-                            articleExists = Supplier3.ArticleInInventory(id);
-                            if (articleExists)
-                            {
-                                tempArticle = Supplier3.GetArticle(id);
-                                if (maxExpectedPrice < tempArticle.Price)
-                                {
-                                    article = tempArticle;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            var article = _suppliers.Where(s => s.ArticleInInventory(id))
+                .Select(a=>a.GetArticle(id))
+                .FirstOrDefault(a=>a.Price < maxExpectedPrice);
 
-            article = tempArticle;
             #endregion
 
             #region selling article
