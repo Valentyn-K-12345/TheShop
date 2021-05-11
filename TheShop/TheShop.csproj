@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\TheShop.Application\TheShop.Application.csproj">
       <Project>{796ff16c-b7f0-42da-806b-57735b87c056}</Project>
       <Name>TheShop.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheShop.Core\TheShop.Core.csproj">
+      <Project>{82B6DAF0-8753-4C44-8D5D-4235D4E695B0}</Project>
+      <Name>TheShop.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\TheShop.Data\TheShop.Data.csproj">
       <Project>{45e8ed31-5e08-4d1f-a45e-fb60235771b3}</Project>
