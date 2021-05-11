@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheShop.Domain.Models;
 using TheShop.Supplier.Domain.Models;
 
 namespace TheShop.Application.Interfaces
@@ -11,5 +12,6 @@ namespace TheShop.Application.Interfaces
     {
         SupplierArticle FindArticle(int id, int maxExpectedPrice);
         void SellArticle(SupplierArticle article, int buyerId);
+        Article GetArticle(int id);
     }
 }

@@ -71,5 +71,10 @@ namespace TheShop.Application.Services
             {
             }
         }
+
+        public Article GetArticle(int id)
+        {
+            return _articleRepository.GetArticle(id);
+        }
     }
 }

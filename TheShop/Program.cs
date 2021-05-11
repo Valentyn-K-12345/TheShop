@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using System;
-using TheShop.Application.Services;
+using TheShop.Application.Interfaces;
 
 namespace TheShop
 {
@@ -10,7 +10,7 @@ namespace TheShop
 		{           
             var container = Startup.GetContainer();
 
-            var articleService = container.Resolve<ArticleService>();
+            var articleService = container.Resolve<IArticleService>();
 
 
             try
@@ -27,7 +27,7 @@ namespace TheShop
 			try
 			{
 				//print article on console
-				var article = articleService.GetById(1);
+				var article = articleService.GetArticle(1);
 				Console.WriteLine("Found article with ID: " + article.Id);
 			}
 			catch (Exception ex)
@@ -38,7 +38,7 @@ namespace TheShop
 			try
 			{
 				//print article on console				
-				var article = articleService.GetById(12);
+				var article = articleService.GetArticle(12);
 				Console.WriteLine("Found article with ID: " + article.Id);
 			}
 			catch (Exception ex)
