@@ -44,10 +44,18 @@
     <Compile Include="Interfaces\IArticleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ArticleService.cs" />
+    <Compile Include="Suppliers\Supplier2.cs" />
+    <Compile Include="Suppliers\Supplier3.cs" />
     <Compile Include="Suppliers\Supplier1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TheShop.Supplier.Domain\TheShop.Supplier.Domain.csproj">
+      <Project>{8397e27c-5ff0-4fc0-8d7b-a579d73d27b5}</Project>
+      <Name>TheShop.Supplier.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
