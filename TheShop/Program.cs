@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Autofac;
+using System;
 
 namespace TheShop
 {
 	internal class Program
 	{
 		private static void Main(string[] args)
-		{
-			var shopService = new ShopService();
+		{           
+            var container = Startup.GetContainer();
 
-			try
+            var shopService = container.Resolve<ShopService>();
+
+
+            try
 			{
 				//order and sell
 				shopService.OrderAndSellArticle(1, 20, 10);
