@@ -8,5 +8,7 @@ namespace TheShop.Supplier.Domain.Models
 {
     public class SupplierArticle
     {
+        public int Id { get; set; }
+        public decimal Price { get; set; }
     }
 }
