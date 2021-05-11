@@ -52,6 +52,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TheShop.Domain\TheShop.Domain.csproj">
+      <Project>{2024A079-DEA5-4DEA-BDC4-82E361EAFE03}</Project>
+      <Name>TheShop.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheShop.Supplier.Domain\TheShop.Supplier.Domain.csproj">
       <Project>{8397e27c-5ff0-4fc0-8d7b-a579d73d27b5}</Project>
       <Name>TheShop.Supplier.Domain</Name>

@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheShop.Application.Interfaces;
+using TheShop.Application.Suppliers;
+using TheShop.Domain.Interfaces;
+using TheShop.Domain.Models;
+using TheShop.Supplier.Domain.Models;
 
 namespace TheShop.Application.Services
 {
     public class ArticleService : IArticleService
     {
-        private DatabaseDriver DatabaseDriver;
+        private IArticleRepository _articleRepository;
         private Logger logger;
 
         private Supplier1 Supplier1;
         private Supplier2 Supplier2;
         private Supplier3 Supplier3;
 
-        public ArticleService()
+        public ArticleService(IArticleRepository articleRepository)
         {
-            DatabaseDriver = new DatabaseDriver();
+            _articleRepository = articleRepository;
             logger = new Logger();
             Supplier1 = new Supplier1();
             Supplier2 = new Supplier2();
@@ -29,25 +33,25 @@ namespace TheShop.Application.Services
         {
             #region ordering article
 
-            Article article = null;
-            Article tempArticle = null;
+            SupplierArticle article = null;
+            SupplierArticle tempArticle = null;
             var articleExists = Supplier1.ArticleInInventory(id);
             if (articleExists)
             {
                 tempArticle = Supplier1.GetArticle(id);
-                if (maxExpectedPrice < tempArticle.ArticlePrice)
+                if (maxExpectedPrice < tempArticle.Price)
                 {
                     articleExists = Supplier2.ArticleInInventory(id);
                     if (articleExists)
                     {
                         tempArticle = Supplier2.GetArticle(id);
-                        if (maxExpectedPrice < tempArticle.ArticlePrice)
+                        if (maxExpectedPrice < tempArticle.Price)
                         {
                             articleExists = Supplier3.ArticleInInventory(id);
                             if (articleExists)
                             {
                                 tempArticle = Supplier3.GetArticle(id);
-                                if (maxExpectedPrice < tempArticle.ArticlePrice)
+                                if (maxExpectedPrice < tempArticle.Price)
                                 {
                                     article = tempArticle;
                                 }
@@ -69,13 +73,16 @@ namespace TheShop.Application.Services
 
             logger.Debug("Trying to sell article with id=" + id);
 
-            article.IsSold = true;
-            article.SoldDate = DateTime.Now;
-            article.BuyerUserId = buyerId;
+            ArticleSale sale = new ArticleSale()
+            {
+                ArticleId = article.Id,
+                BuyerId = buyerId,
+                Date = DateTime.Now
+            };
 
             try
             {
-                DatabaseDriver.Save(article);
+                _articleRepository.AddArticleSale(sale);
                 logger.Info("Article with id=" + id + " is sold.");
             }
             catch (ArgumentNullException ex)
@@ -92,23 +99,7 @@ namespace TheShop.Application.Services
 
         public Article GetById(int id)
         {
-            return DatabaseDriver.GetById(id);
-        }
-    }
-
-    //in memory implementation
-    public class DatabaseDriver
-    {
-        private List<Article> _articles = new List<Article>();
-
-        public Article GetById(int id)
-        {
-            return _articles.Single(x => x.ID == id);
-        }
-
-        public void Save(Article article)
-        {
-            _articles.Add(article);
+            return _articleRepository.GetArticle(id);
         }
     }
 
@@ -128,72 +119,5 @@ namespace TheShop.Application.Services
         {
             Console.WriteLine("Debug: " + message);
         }
-    }
-
-    public class Supplier1
-    {
-        public bool ArticleInInventory(int id)
-        {
-            return true;
-        }
-
-        public Article GetArticle(int id)
-        {
-            return new Article()
-            {
-                ID = 1,
-                Name_of_article = "Article from supplier1",
-                ArticlePrice = 458
-            };
-        }
-    }
-
-    public class Supplier2
-    {
-        public bool ArticleInInventory(int id)
-        {
-            return true;
-        }
-
-        public Article GetArticle(int id)
-        {
-            return new Article()
-            {
-                ID = 1,
-                Name_of_article = "Article from supplier2",
-                ArticlePrice = 459
-            };
-        }
-    }
-
-    public class Supplier3
-    {
-        public bool ArticleInInventory(int id)
-        {
-            return true;
-        }
-
-        public Article GetArticle(int id)
-        {
-            return new Article()
-            {
-                ID = 1,
-                Name_of_article = "Article from supplier3",
-                ArticlePrice = 460
-            };
-        }
-    }
-
-    public class Article
-    {
-        public int ID { get; set; }
-
-        public string Name_of_article { get; set; }
-
-        public int ArticlePrice { get; set; }
-        public bool IsSold { get; set; }
-
-        public DateTime SoldDate { get; set; }
-        public int BuyerUserId { get; set; }
     }
 }
