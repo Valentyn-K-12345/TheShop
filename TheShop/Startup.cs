@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TheShop.Data.Repository;
 using TheShop.Domain.Interfaces;
+using TheShop.Application.Services;
+using TheShop.Supplier.Domain.Interfaces;
 
 namespace TheShop
 {
@@ -21,7 +23,13 @@ namespace TheShop
 
 
             //Service
-            builder.RegisterType<TheShop.Application.Services.ArticleService>();
+            builder.RegisterType<ArticleService>();
+
+            //Suppliers
+
+            builder.RegisterType<TheShop.Application.Suppliers.Supplier1>().As<ISupplier>();
+            builder.RegisterType<TheShop.Application.Suppliers.Supplier2>().As<ISupplier>();
+            builder.RegisterType<TheShop.Application.Suppliers.Supplier3>().As<ISupplier>();
 
             return builder.Build();
         }
