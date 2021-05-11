@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheShop.Application.Interfaces;
 using TheShop.Application.Suppliers;
+using TheShop.Core.Logger;
 using TheShop.Domain.Interfaces;
 using TheShop.Domain.Models;
 using TheShop.Supplier.Domain.Models;
@@ -14,16 +15,17 @@ namespace TheShop.Application.Services
     public class ArticleService : IArticleService
     {
         private IArticleRepository _articleRepository;
-        private Logger logger;
+        private ILogger _logger;
 
         private Supplier1 Supplier1;
         private Supplier2 Supplier2;
         private Supplier3 Supplier3;
 
-        public ArticleService(IArticleRepository articleRepository)
+        public ArticleService(IArticleRepository articleRepository,
+            ILogger logger)
         {
             _articleRepository = articleRepository;
-            logger = new Logger();
+            _logger = logger;
             Supplier1 = new Supplier1();
             Supplier2 = new Supplier2();
             Supplier3 = new Supplier3();
@@ -71,7 +73,7 @@ namespace TheShop.Application.Services
                 throw new Exception("Could not order article");
             }
 
-            logger.Debug("Trying to sell article with id=" + id);
+            _logger.Debug("Trying to sell article with id=" + id);
 
             ArticleSale sale = new ArticleSale()
             {
@@ -83,11 +85,11 @@ namespace TheShop.Application.Services
             try
             {
                 _articleRepository.AddArticleSale(sale);
-                logger.Info("Article with id=" + id + " is sold.");
+                _logger.Info("Article with id=" + id + " is sold.");
             }
             catch (ArgumentNullException ex)
             {
-                logger.Error("Could not save article with id=" + id);
+                _logger.Error("Could not save article with id=" + id);
                 throw new Exception("Could not save article with id");
             }
             catch (Exception)
@@ -100,24 +102,6 @@ namespace TheShop.Application.Services
         public Article GetById(int id)
         {
             return _articleRepository.GetArticle(id);
-        }
-    }
-
-    public class Logger
-    {
-        public void Info(string message)
-        {
-            Console.WriteLine("Info: " + message);
-        }
-
-        public void Error(string message)
-        {
-            Console.WriteLine("Error: " + message);
-        }
-
-        public void Debug(string message)
-        {
-            Console.WriteLine("Debug: " + message);
         }
     }
 }

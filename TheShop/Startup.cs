@@ -8,6 +8,7 @@ using TheShop.Data.Repository;
 using TheShop.Domain.Interfaces;
 using TheShop.Application.Services;
 using TheShop.Supplier.Domain.Interfaces;
+using TheShop.Core.Logger;
 
 namespace TheShop
 {
@@ -16,6 +17,11 @@ namespace TheShop
         public static IContainer GetContainer()
         {
             ContainerBuilder builder = new ContainerBuilder();
+
+            //Core
+
+            builder.RegisterType<Logger.Logger>().As<ILogger>().SingleInstance();
+
 
             //Repository
 
