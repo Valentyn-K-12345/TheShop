@@ -21,7 +21,7 @@ namespace TheShop
 
 
             //Service
-            builder.RegisterType<TheShop.ShopService>();
+            builder.RegisterType<TheShop.Application.Services.ArticleService>();
 
             return builder.Build();
         }
