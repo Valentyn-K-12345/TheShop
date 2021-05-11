@@ -29,24 +29,26 @@ namespace TheShop.Application.Services
             _suppliers = suppliers.ToList();
         }
 
-        public void OrderAndSellArticle(int id, int maxExpectedPrice, int buyerId)
+        public Article GetById(int id)
         {
-            #region ordering article
+            return _articleRepository.GetArticle(id);
+        }
 
-            var article = _suppliers.Where(s => s.ArticleInInventory(id))
-                .Select(a=>a.GetArticle(id))
-                .FirstOrDefault(a=>a.Price < maxExpectedPrice);
+        public SupplierArticle FindArticle(int id, int maxExpectedPrice)
+        {
+            return _suppliers.Where(s => s.ArticleInInventory(id))
+                .Select(a => a.GetArticle(id))
+                .FirstOrDefault(a => a.Price < maxExpectedPrice);
+        }
 
-            #endregion
-
-            #region selling article
-
+        public void SellArticle(SupplierArticle article, int buyerId)
+        {
             if (article == null)
             {
                 throw new Exception("Could not order article");
             }
 
-            _logger.Debug("Trying to sell article with id=" + id);
+            _logger.Debug("Trying to sell article with id=" + article.Id);
 
             ArticleSale sale = new ArticleSale()
             {
@@ -58,23 +60,16 @@ namespace TheShop.Application.Services
             try
             {
                 _articleRepository.AddArticleSale(sale);
-                _logger.Info("Article with id=" + id + " is sold.");
+                _logger.Info("Article with id=" + article.Id + " is sold.");
             }
             catch (ArgumentNullException ex)
             {
-                _logger.Error("Could not save article with id=" + id);
+                _logger.Error("Could not save article with id=" + article.Id);
                 throw new Exception("Could not save article with id");
             }
             catch (Exception)
             {
             }
-
-            #endregion
-        }
-
-        public Article GetById(int id)
-        {
-            return _articleRepository.GetArticle(id);
         }
     }
 }
