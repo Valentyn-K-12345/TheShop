@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72C6A701-A607-4030-8A52-D004440C2AA1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TheShop</RootNamespace>
-    <AssemblyName>TheShop</AssemblyName>
+    <ProjectGuid>{DE0799FE-2172-44AF-9711-8B1BAEB972B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TheShop.Domain.IoC</RootNamespace>
+    <AssemblyName>TheShop.Domain.IoC</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,36 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logger\Logger.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DependencyContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheShop.Application\TheShop.Application.csproj">
-      <Project>{796ff16c-b7f0-42da-806b-57735b87c056}</Project>
+      <Project>{796FF16C-B7F0-42DA-806B-57735B87C056}</Project>
       <Name>TheShop.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TheShop.Core\TheShop.Core.csproj">
-      <Project>{82B6DAF0-8753-4C44-8D5D-4235D4E695B0}</Project>
-      <Name>TheShop.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TheShop.Domain.IoC\TheShop.Domain.IoC.csproj">
-      <Project>{de0799fe-2172-44af-9711-8b1baeb972b0}</Project>
-      <Name>TheShop.Domain.IoC</Name>
+    <ProjectReference Include="..\TheShop.Data\TheShop.Data.csproj">
+      <Project>{45E8ED31-5E08-4D1F-A45E-FB60235771B3}</Project>
+      <Name>TheShop.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\TheShop.Domain\TheShop.Domain.csproj">
       <Project>{2024A079-DEA5-4DEA-BDC4-82E361EAFE03}</Project>
       <Name>TheShop.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\TheShop.Supplier.Domain\TheShop.Supplier.Domain.csproj">
-      <Project>{8397e27c-5ff0-4fc0-8d7b-a579d73d27b5}</Project>
+      <Project>{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}</Project>
       <Name>TheShop.Supplier.Domain</Name>
     </ProjectReference>
   </ItemGroup>

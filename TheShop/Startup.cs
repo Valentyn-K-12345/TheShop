@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheShop.Data.Repository;
-using TheShop.Domain.Interfaces;
-using TheShop.Application.Services;
-using TheShop.Supplier.Domain.Interfaces;
 using TheShop.Core.Logger;
 
 namespace TheShop
@@ -21,21 +17,6 @@ namespace TheShop
             //Core
 
             builder.RegisterType<Logger.Logger>().As<ILogger>().SingleInstance();
-
-
-            //Repository
-
-            builder.RegisterType<InMemoryArticleRepository>().As<IArticleRepository>().SingleInstance();
-
-
-            //Service
-            builder.RegisterType<ArticleService>();
-
-            //Suppliers
-
-            builder.RegisterType<TheShop.Application.Suppliers.Supplier1>().As<ISupplier>();
-            builder.RegisterType<TheShop.Application.Suppliers.Supplier2>().As<ISupplier>();
-            builder.RegisterType<TheShop.Application.Suppliers.Supplier3>().As<ISupplier>();
 
             return builder.Build();
         }
