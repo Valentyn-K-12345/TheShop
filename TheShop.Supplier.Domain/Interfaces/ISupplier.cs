@@ -7,7 +7,7 @@ using TheShop.Supplier.Domain.Models;
 
 namespace TheShop.Supplier.Domain.Interfaces
 {
-    interface ISupplier
+    public interface ISupplier
     {
         bool ArticleInInventory(int id);
         SupplierArticle GetArticle(int id);
