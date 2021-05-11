@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Data", "TheShop.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Application", "TheShop.Application\TheShop.Application.csproj", "{796FF16C-B7F0-42DA-806B-57735B87C056}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Supplier.Domain", "TheShop.Supplier.Domain\TheShop.Supplier.Domain.csproj", "{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{796FF16C-B7F0-42DA-806B-57735B87C056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{796FF16C-B7F0-42DA-806B-57735B87C056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{796FF16C-B7F0-42DA-806B-57735B87C056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
