@@ -10,7 +10,7 @@ namespace TheShop.Domain.Interfaces
     public interface IArticleRepository
     {
         Article GetArticle(int id);
-        Article AddArticle(Article article);
-        Article AddArticleSale(ArticleSale sale);
+        Article SaveArticle(Article article);
+        ArticleSale AddArticleSale(ArticleSale sale);
     }
 }
