@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Application", "TheS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Supplier.Domain", "TheShop.Supplier.Domain\TheShop.Supplier.Domain.csproj", "{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Article", "Article", "{85467605-2E54-4B1D-9E55-F653FAD24499}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Supplier", "Supplier", "{2525BFB9-3002-4E5F-AD31-ED7627518F38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72C6A701-A607-4030-8A52-D004440C2AA1} = {85467605-2E54-4B1D-9E55-F653FAD24499}
+		{2024A079-DEA5-4DEA-BDC4-82E361EAFE03} = {85467605-2E54-4B1D-9E55-F653FAD24499}
+		{45E8ED31-5E08-4D1F-A45E-FB60235771B3} = {85467605-2E54-4B1D-9E55-F653FAD24499}
+		{796FF16C-B7F0-42DA-806B-57735B87C056} = {85467605-2E54-4B1D-9E55-F653FAD24499}
+		{8397E27C-5FF0-4FC0-8D7B-A579D73D27B5} = {2525BFB9-3002-4E5F-AD31-ED7627518F38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4AED31B5-016C-4325-B4E1-414413C0F084}
