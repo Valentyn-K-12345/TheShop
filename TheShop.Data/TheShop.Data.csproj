@@ -45,6 +45,10 @@
     <Compile Include="Repository\InMemoryArticleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TheShop.Core\TheShop.Core.csproj">
+      <Project>{82B6DAF0-8753-4C44-8D5D-4235D4E695B0}</Project>
+      <Name>TheShop.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheShop.Domain\TheShop.Domain.csproj">
       <Project>{2024a079-dea5-4dea-bdc4-82e361eafe03}</Project>
       <Name>TheShop.Domain</Name>
