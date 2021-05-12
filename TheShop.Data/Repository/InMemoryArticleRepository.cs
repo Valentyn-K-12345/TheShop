@@ -13,12 +13,18 @@ namespace TheShop.Data.Repository
         private List<Article> _articles;
         private List<ArticleSale> _articaleSales;
 
+        public InMemoryArticleRepository()
+        {
+            _articles = new List<Article>();
+            _articaleSales = new List<ArticleSale>();
+        }
+
         public Article SaveArticle(Article article)
         {
             //simple upsert
             if(article.Id == 0)
             {
-                article.Id = _articles.Max(a => a.Id) + 1;
+                article.Id = _articles.Count != 0 ? _articles.Max(a => a.Id) + 1 : 1;
             }
             else
             {
